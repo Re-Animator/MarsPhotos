@@ -7,20 +7,20 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 private const val BASE_URL =
-    "http://android-kotlin-fun-mars-server.appspot.com"
+    "https://android-kotlin-fun-mars-server.appspot.com/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(MoshiConverterFactory.create())
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL)
     .build()
 
 interface MarsApiService {
     @GET("photos")
-    suspend fun getPhotos(): List<MarsPhotos>
+    suspend fun getPhotos(): List<MarsPhoto>
 }
 
 object MarsApi {
